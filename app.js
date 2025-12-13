@@ -62,7 +62,7 @@ app.post("/listings", async (req, res) => {
 
 //Update Route
 app.put("/listings/:id", async (req, res) => {
-    const {id} = req.params;
+    let {id} = req.params;
     const listing = await Listing.findByIdAndUpdate(id, req.body.listing, {
       runValidators: true,
       new: true,
@@ -70,6 +70,13 @@ app.put("/listings/:id", async (req, res) => {
     res.redirect(`/listings/${id}`);
 });
 
+//Delete Route
+app.delete("/listings/:id", async (req, res) => {
+    let {id} = req.params;
+    let deletedListing = await Listing.findByIdAndDelete(id);
+    console.log("Deleted Listing:", deletedListing);
+    res.redirect("/listings");
+});
 
 // app.get("/testListing", async (req, res) => {
 //     let sampleListing = new Listing({
