@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>WanderInn</title>
+  </head>
+  <body>
+    <form method="post" action="/listings">
+      <h1>Create a New Listing</h1>
+
+      <label>Title:</label>
+      <input type="text" name="listing[title]" required />
+      <br /><br />
+
+      <label>Description:</label>
+      <textarea name="listing[description]"></textarea>
+      <br /><br />
+
+      <label>Image URL:</label>
+      <input type="text" name="listing[image][url]" />
+      <br /><br />
+
+      <input
+        name="listing[price]"
+        type="number"
+        step="0.01"
+        placeholder="Enter Price"
+      />
+      <br /><br />
+
+      <input name="listing[country]" type="text" placeholder="Enter Country" />
+      <br /><br />
+
+      <input
+        name="listing[location]"
+        type="text"
+        placeholder="Enter Location"
+      />
+      <br /><br />
+
+      <button type="submit">Create Listing</button>
+    </form>
+  </body>
+</html>

@@ -1,28 +1,28 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>WanderInn</title>
-</head>
-<body>
+  </head>
+  <body>
     <h1>All Listings</h1>
+    <form action="/listings/new" method="get">
+      <button type="submit">Create New Listing</button>
+    </form>
 
     <ul>
-        <% listings.forEach(listing=> { %>
-            <div>
-                <h2>
-                    <li><a href="/listings/<%= listing._id %>">
-                        <%= listing.title %>
-                    </a></li>
-                </h2>
-                <p>
-                    <%= listing.description %>
-                </p>
-                <img src="<%= listing.image.url %>" width="300" />
-            </div>
-            <% }); %>
-
+      <% listings.forEach(listing=> { %>
+      <div>
+        <h2>
+          <li>
+            <a href="/listings/<%= listing._id %>"> <%= listing.title %> </a>
+          </li>
+        </h2>
+        <p><%= listing.description %></p>
+        <img src="<%= listing.image.url %>" width="300" />
+      </div>
+      <% }); %>
     </ul>
-</body>
+  </body>
 </html>
