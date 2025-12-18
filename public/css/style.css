@@ -4,6 +4,13 @@ body {
   font-optical-sizing: auto !important;
   font-weight: 500 !important;
   font-style: normal  !important;
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+.container{
+  flex: 1;
 }
 
 /* Navbar */
@@ -88,4 +95,10 @@ body {
 .card-img-overlay:hover{
   opacity: 0.2;
   background-color: white;
+}
+
+/* adding new listings */
+.add-btn{
+  background-color: #fe424d !important;
+  border: none !important;
 }
