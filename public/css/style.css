@@ -32,12 +32,10 @@ body {
 .f-info {
   height: 8rem;
   background-color: #ebebeb;
-
   display: flex;
   flex-direction: column;        /* stack vertically */
   justify-content: center;       /* vertical centering */
   align-items: center;           /* horizontal centering */
-
   text-align: center;
   gap: 0.6rem;                   /* spacing between rows */
 }
