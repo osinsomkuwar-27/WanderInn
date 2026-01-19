@@ -5,6 +5,7 @@ const Listing = require('./models/listing');
 const path = require('path');
 const methodOverride = require('method-override');
 const ejsMate = require('ejs-mate');
+const wrapSync = require('/utils/wrapAsync.js');
 
 const MONGO_URL = "mongodb://127.0.0.1:27017/wanderinn";
 
@@ -56,15 +57,11 @@ app.get("/listings/:id", async (req, res) => {
 });
 
 //post route to create a new listing
-app.post("/listings", async (req, res) => {
-    try{
+app.post("/listings", wrapAsync(async (req, res) => {
     const newListing = new Listing(req.body.listing);
     await newListing.save();
     res.redirect("/listings");
-    }catch(err){
-        next(err);
-    }
-});
+}));
 
 //Update Route
 app.put("/listings/:id", async (req, res) => {
