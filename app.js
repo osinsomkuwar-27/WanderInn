@@ -33,6 +33,17 @@ app.get("/", (req, res) => {
     res.send("Welcome to WanderInn");
 });
 
+const validateListing = (req, res, next) => {
+    let {error} = listingSchema.validate(req.body);
+    if (error) {
+        let errMsg = error.details.map(el => el.message).join(",");
+      throw new ExpressError(400, errMsg);
+    }
+    else{
+        next();
+    }
+}
+
 //index route to show all listings
 app.get("/listings", wrapAsync(async (req, res) => {
     const allListings = await Listing.find({});
@@ -59,26 +70,27 @@ app.get("/listings/:id", wrapAsync(async (req, res) => {
 }));
 
 //post route to create a new listing
-app.post("/listings", wrapAsync(async (req, res) => {
-    const result = listingSchema.validate(req.body);
-    console.log(result);
-    if(result.error){
-        throw new ExpressError(400, result.error);
-    }
+app.post(
+  "/listings",
+  validateListing, wrapAsync(async (req, res) => {
     const newListing = new Listing(req.body.listing);
     await newListing.save();
     res.redirect("/listings");
-}));
+  }),
+);
 
 //Update Route
-app.put("/listings/:id", wrapAsync(async (req, res) => {
-    let {id} = req.params;
+app.put(
+  "/listings/:id",
+  validateListing, wrapAsync(async (req, res) => {
+    let { id } = req.params;
     const listing = await Listing.findByIdAndUpdate(id, req.body.listing, {
       runValidators: true,
       new: true,
     });
     res.redirect(`/listings/${id}`);
-}));
+  }),
+);
 
 //Delete Route
 app.delete("/listings/:id", wrapAsync(async (req, res) => {
